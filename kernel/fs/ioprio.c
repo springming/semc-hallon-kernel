@@ -29,7 +29,7 @@
 
 int set_task_ioprio(struct task_struct *task, int ioprio)
 {
-	int err;
+	int i, err;
 	struct io_context *ioc;
 	const struct cred *cred = current_cred(), *tcred;
 
@@ -59,6 +59,8 @@ int set_task_ioprio(struct task_struct *task, int ioprio)
 			err = -ENOMEM;
 			break;
 		}
+		/* let other ioc users see the new values */
+		smp_wmb();
 		task->io_context = ioc;
 	} while (1);
 
