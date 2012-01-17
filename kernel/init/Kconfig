@@ -352,8 +352,6 @@ config TREE_PREEMPT_RCU
 	  is also required.  It also scales down nicely to
 	  smaller systems.
 
-endchoice
-
 config TINY_RCU
 	bool "UP-only small-memory-footprint RCU"
 	depends on !SMP
