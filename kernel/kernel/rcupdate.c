@@ -161,6 +161,11 @@ EXPORT_SYMBOL_GPL(synchronize_rcu_bh);
 
 #endif /* #ifndef CONFIG_TINY_RCU */
 
+#ifndef CONFIG_JRCU
+
+
+#endif /* CONFIG_JRCU */
+
 void rcu_scheduler_starting(void)
 {
 	WARN_ON(num_online_cpus() != 1);
