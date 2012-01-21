@@ -545,12 +545,8 @@ static irqreturn_t msm_datamover_irq_handler(int irq, void *dev_id)
 			continue;
 		}
 		do {
-<<<<<<< HEAD
 			valid = 1;
-			ch_result = readl_relaxed(DMOV_REG(DMOV_RSLT(ch), adm));
-=======
 			ch_result = readl(DMOV_REG(DMOV_RSLT(ch), adm));
->>>>>>> parent of e2b9be7... [thederekjay] use __raw variants of readl/writel
 			if (list_empty(&dmov_conf[adm].active_commands[ch])) {
 				PRINT_ERROR("msm_datamover_irq_handler id %d, got result "
 					"with no active command, status %x, result %x\n",
