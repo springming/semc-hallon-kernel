@@ -1,53 +1,36 @@
-/*
- * sfb.h        Stochastic Fair Blue
- *
- *		This program is free software; you can redistribute it and/or
- *		modify it under the terms of the GNU General Public License
- *		as published by the Free Software Foundation; either version
- *		2 of the License, or (at your option) any later version.
- *
- * Authors:	Juliusz Chroboczek <jch@pps.jussieu.fr>
- */
-
-#include <linux/types.h>
-
-#define MAXHASHES 12
-#define MAXBUCKETS 32
-
-enum
-{
-	TCA_SFB_UNSPEC,
-	TCA_SFB_PARMS,
-	__TCA_SFB_MAX,
+enum {
+        TCA_SFB_UNSPEC,
+        TCA_SFB_PARMS,
+        __TCA_SFB_MAX,
 };
 
 #define TCA_SFB_MAX (__TCA_SFB_MAX - 1)
 
-enum {
-        SFB_HASH_FLOW,
-        SFB_HASH_SOURCE,
-        SFB_HASH_DEST,
-        SFB_HASH_SOURCE_DEST,
-        __SFB_HASH_MAX,
+/*
+ * Note: increment, decrement are Q0.16 fixed-point values.
+ */
+struct tc_sfb_qopt {
+        __u32 rehash_interval;  /* delay between hash move, in ms */
+        __u32 warmup_time;      /* double buffering warmup time in ms (warmup_time < rehash_interval) */
+        __u32 max;              /* max len of qlen_min */
+        __u32 bin_size;         /* maximum queue length per bin */
+        __u32 increment;        /* probability increment, (d1 in Blue) */
+        __u32 decrement;        /* probability decrement, (d2 in Blue) */
+        __u32 limit;            /* max SFB queue length */
+        __u32 penalty_rate;     /* inelastic flows are rate limited to 'rate' pps */
+        __u32 penalty_burst;
 };
 
-struct tc_sfb_qopt
-{
-        __u8 hash_type, pad;
-        __u16 numhashes, numbuckets;
-        __u16 rehash_interval, db_interval;
-        __u16 max, target;
-        __u16 increment, decrement;
-        __u16 pad2;
-        __u32 limit;
-        __u32 penalty_rate, penalty_burst;
-};
-
-struct tc_sfb_xstats
-{
-        __u32 earlydrop, penaltydrop, bucketdrop, queuedrop, marked;
-        __u16 maxqlen, maxprob;
+struct tc_sfb_xstats {
+        __u32 earlydrop;
+        __u32 penaltydrop;
+        __u32 bucketdrop;
+        __u32 queuedrop;
+        __u32 childdrop; /* drops in child qdisc */
+        __u32 marked;
+        __u32 maxqlen;
+        __u32 maxprob;
+        __u32 avgprob;
 };
 
 #define SFB_MAX_PROB 0xFFFF
-
