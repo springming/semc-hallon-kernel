@@ -751,11 +751,10 @@ endif
 
 choice
   prompt "Optimization level"
-  default CC_OPTIMIZE_DEFAULT
+  default CC_OPTIMIZE_FOR_SIZE
 
 config CC_OPTIMIZE_FOR_SIZE
 	bool "Use -Os"
-	default y
 	help
 	  Enabling this option will pass "-Os" instead of "-O2" to gcc
 	  resulting in a smaller kernel.
