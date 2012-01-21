@@ -115,22 +115,22 @@ config CPU_FREQ_DEFAULT_GOV_INTERACTIVE
 	bool "interactive"
 	select CPU_FREQ_GOV_INTERACTIVE
 	help
-	 Use the 'interactive' governor as default. This gets full cpu frequency
-	 scaling for workloads that are latency sensitive, typically interactive
-	 workloads..
+	  Use the 'interactive' governor as default. This gets full cpu frequency
+	  scaling for workloads that are latency sensitive, typically interactive
+	  workloads..
 
 config CPU_FREQ_DEFAULT_GOV_SMARTASS
 	bool "smartass"
 	select CPU_FREQ_GOV_SMARTASS
 	select CPU_FREQ_GOV_PERFORMANCE
 	help
-		Use the CPUFreq Governor 'smartass' as default.
+	  Use the CPUFreq Governor 'smartass' as default.
 
 config CPU_FREQ_DEFAULT_GOV_SCARY
 	bool "scary"
 	select CPU_FREQ_GOV_SCARY
 	help
-		Use the CPUFreq governor 'scary' as default.
+	  Use the CPUFreq governor 'scary' as default.
 
 config CPU_FREQ_DEFAULT_GOV_MINMAX
 	bool "minmax"
@@ -160,7 +160,14 @@ config CPU_FREQ_DEFAULT_GOV_SMARTASS2
 	bool "smartass2"
 	select CPU_FREQ_GOV_SMARTASS2
 	help
-	 Use the CPUFreq governor 'smartassV2' as default.
+	  Use the CPUFreq governor 'smartassV2' as default.
+
+config CPU_FREQ_DEFAULT_GOV_LULZACTIVE
+	bool "lulzactive"
+	select CPU_FREQ_GOV_LULZACTIVE
+	select CPU_FREQ_GOV_PERFORMANCE
+	help
+	  Use the CPUFreq governor 'lulzactive' as default.
 
 endchoice
 
@@ -298,6 +305,14 @@ config CPU_FREQ_GOV_SMARTASS2
 	depends on CPU_FREQ
 	help
 	  'smartassV2' - a "smart" optimized governor for the hero!
+
+	  If in doubt, say N.
+
+config CPU_FREQ_GOV_LULZACTIVE
+	tristate "'lulzactive' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	  'lulzactive' - a new interactive governor by Tegrak!
 
 	  If in doubt, say N.
 
