@@ -3508,12 +3508,6 @@ static struct android_pmem_platform_data android_pmem_adsp_pdata = {
 	.cached = 0,
 };
 
-static struct android_pmem_platform_data android_pmem_adsp_cached_pdata = {
-	.name = "pmem_adsp_cached",
-	.allocator_type = PMEM_ALLOCATORTYPE_BITMAP,
-	.cached = 1,
-};
-
 static struct android_pmem_platform_data android_pmem_swiqi_pdata = {
 	.name = "pmem_swiqi",
 	.allocator_type = PMEM_ALLOCATORTYPE_BITMAP,
@@ -3544,11 +3538,6 @@ static struct platform_device android_pmem_adsp_device = {
 	.dev = {.platform_data = &android_pmem_adsp_pdata},
 };
 
-static struct platform_device android_pmem_adsp_cached_device = {
-	.name = "android_pmem",
-	.id = 5,
-	.dev = {.platform_data = &android_pmem_adsp_cached_pdata},
-};
 static struct platform_device android_pmem_swiqi_device = {
 	.name = "android_pmem",
 	.id = 6,
@@ -3929,7 +3918,6 @@ static struct platform_device *devices[] __initdata = {
 #endif /* CONFIG_FB_MSM_HDMI_SII9024A_PANEL */
 	&android_pmem_kernel_ebi1_device,
 	&android_pmem_adsp_device,
-	&android_pmem_adsp_cached_device,
 	&android_pmem_swiqi_device,
 	&android_pmem_camera_device,
 	&android_pmem_audio_device,
@@ -4731,11 +4719,6 @@ static void __init msm7x30_allocate_memory_regions(void)
 		android_pmem_adsp_pdata.start = __pa(addr);
 		android_pmem_adsp_pdata.size = size;
 		pr_info("allocating %lu bytes at %p (%lx physical) for adsp "
-			"pmem arena\n", size, addr, __pa(addr));
-
-		android_pmem_adsp_cached_pdata.start = __pa(addr);
-		android_pmem_adsp_cached_pdata.size = size;
-		pr_info("setting %lu bytes at %p (%lx physical) for adsp cached "
 			"pmem arena\n", size, addr, __pa(addr));
 	}
 
