@@ -184,13 +184,8 @@
 #else
 #define MSM_FB_SIZE		0x500000
 #endif /* CONFIG_FB_MSM_HDMI_SII9024A_PANEL */
-<<<<<<< HEAD
-#define MSM_GPU_PHYS_SIZE       SZ_4M
-#define MSM_PMEM_CAMERA_SIZE    0x2B00000
-=======
 #define MSM_GPU_PHYS_SIZE       SZ_2M
 #define MSM_PMEM_CAMERA_SIZE    0x2000000
->>>>>>> parent of 73ca672... (experimental) Bumped KGSL pmem
 #define MSM_PMEM_ADSP_SIZE      0x1800000
 #define MSM_PMEM_SWIQI_SIZE     0xE00000
 #define PMEM_KERNEL_EBI1_SIZE   0x600000
