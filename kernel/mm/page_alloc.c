@@ -599,10 +599,6 @@ static void __free_pages_ok(struct page *page, unsigned int order)
 		debug_check_no_obj_freed(page_address(page),
 					   PAGE_SIZE << order);
 	}
-
-	for (; index; --index)
-		sanitize_highpage(page + index - 1);
-
 	arch_free_page(page, order);
 	kernel_map_pages(page, 1 << order, 0);
 
@@ -2018,9 +2014,6 @@ void __pagevec_free(struct pagevec *pvec)
 void __free_pages(struct page *page, unsigned int order)
 {
 	if (put_page_testzero(page)) {
-
-		unsigned long index = 1UL << order;
-
 		trace_mm_page_free_direct(page, order);
 		if (order == 0)
 			free_hot_page(page);
