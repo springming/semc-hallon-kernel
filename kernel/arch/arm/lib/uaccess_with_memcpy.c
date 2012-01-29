@@ -12,6 +12,7 @@
 #include <linux/kernel.h>
 #include <linux/ctype.h>
 #include <linux/uaccess.h>
+#include <linux/highmem.h>
 #include <linux/rwsem.h>
 #include <linux/mm.h>
 #include <linux/sched.h>
