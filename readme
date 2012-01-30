@@ -9,7 +9,7 @@ Build commands :
 ----------------
 
 export ARCH=arm
-export CROSS_COMPILE=~/toolchains/arm-eabi-4.4.0/prebuilt/linux-x86/bin/arm-eabi-
+export CROSS_COMPILE=~/toolchains/arm-eabi-4.4.3/prebuilt/linux-x86/bin/arm-eabi-
 
 make adridu59_hallon_defconfig (or semc_hallon_defconfig default)
 make menuconfig
