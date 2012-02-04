@@ -1071,7 +1071,6 @@ static void dm_table_set_integrity(struct dm_table *t)
 no_integrity:
 #if defined(CONFIG_BLK_DEV_INTEGRITY)
 	blk_integrity_register(dm_disk(t->md), NULL);
-
 #endif
 	return;
 }
