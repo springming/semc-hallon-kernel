@@ -52,7 +52,7 @@
 }
 
 /* An arbitrary initial parameter */
-#define JHASH_GOLDEN_RATIO	0xdeadbeef
+#define JHASH_INITVAL	0xdeadbeef
 
 /* The most generic version, hashes an arbitrary sequence
  * of bytes.  No alignment or length assumptions are made about
