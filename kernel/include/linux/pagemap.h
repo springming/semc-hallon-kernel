@@ -404,10 +404,8 @@ static inline int fault_in_pages_writeable(char __user *uaddr, int size)
 		 * for sure, so try to avoid doing it.
 		 */
 		if (((unsigned long)uaddr & PAGE_MASK) !=
-				((unsigned long)end & PAGE_MASK)) {
+				((unsigned long)end & PAGE_MASK))
 		 	ret = __put_user(0, end);
-			(void)c;
-		}
 	}
 	return ret;
 }
