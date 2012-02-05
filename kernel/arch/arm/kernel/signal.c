@@ -186,7 +186,7 @@ static int preserve_vfp_context(struct vfp_sigframe __user *frame)
 	const unsigned long size = VFP_STORAGE_SIZE;
 	int err = 0;
 
-	vfp_sync_hwstate(thread);
+	vfp_sync_state(thread);
 	__put_user_error(magic, &frame->magic, err);
 	__put_user_error(size, &frame->size, err);
 
@@ -251,9 +251,6 @@ static int restore_vfp_context(struct vfp_sigframe __user *frame)
 
 	__get_user_error(h->fpinst, &frame->ufp_exc.fpinst, err);
 	__get_user_error(h->fpinst2, &frame->ufp_exc.fpinst2, err);
-
-	if (!err)
-		vfp_flush_hwstate(thread);
 
 	return err ? -EFAULT : 0;
 }
