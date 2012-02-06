@@ -132,19 +132,19 @@ static int suspend_enter(suspend_state_t state)
 	if (suspend_ops->prepare) {
 		error = suspend_ops->prepare();
 		if (error)
-			goto Platform_finish;
+			return error;
 	}
 
 	error = dpm_suspend_noirq(PMSG_SUSPEND);
 	if (error) {
 		printk(KERN_ERR "PM: Some devices failed to power down\n");
-		goto Platform_finish;
+		goto Platfrom_finish;
 	}
 
 	if (suspend_ops->prepare_late) {
 		error = suspend_ops->prepare_late();
 		if (error)
-			goto Platform_wake;
+			goto Power_up_devices;
 	}
 
 	if (suspend_test(TEST_PLATFORM))
@@ -177,7 +177,7 @@ static int suspend_enter(suspend_state_t state)
  Power_up_devices:
 	dpm_resume_noirq(PMSG_RESUME);
 
- Platform_finish:
+ Platfrom_finish:
 	if (suspend_ops->finish)
 		suspend_ops->finish();
 
