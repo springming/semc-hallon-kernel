@@ -174,6 +174,9 @@ static int suspend_enter(suspend_state_t state)
 	if (suspend_ops->wake)
 		suspend_ops->wake();
 
+ Power_up_devices:
+	dpm_resume_noirq(PMSG_RESUME);
+
  Platform_finish:
 	if (suspend_ops->finish)
 		suspend_ops->finish();
