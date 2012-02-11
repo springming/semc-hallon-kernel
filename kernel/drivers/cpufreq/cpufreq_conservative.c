@@ -167,7 +167,11 @@ static ssize_t show_sampling_rate_min(struct kobject *kobj,
 	return sprintf(buf, "%u\n", min_sampling_rate);
 }
 
-define_one_global_ro(sampling_rate_min);
+#define define_one_ro(_name)    \
+static struct global_attr _name =  \
+__ATTR(_name, 0444, show_##_name, NULL)
+
+define_one_ro(sampling_rate_min);
 
 /* cpufreq_conservative Governor Tunables */
 #define show_one(file_name, object)					\
@@ -294,12 +298,16 @@ static ssize_t store_freq_step(struct kobject *a, struct attribute *b,
 	return count;
 }
 
-define_one_global_rw(sampling_rate);
-define_one_global_rw(sampling_down_factor);
-define_one_global_rw(up_threshold);
-define_one_global_rw(down_threshold);
-define_one_global_rw(ignore_nice_load);
-define_one_global_rw(freq_step);
+#define define_one_rw(_name) \
+static struct global_attr _name = \
+__ATTR(_name, 0644, show_##_name, store_##_name)
+
+define_one_rw(sampling_rate);
+define_one_rw(sampling_down_factor);
+define_one_rw(up_threshold);
+define_one_rw(down_threshold);
+define_one_rw(ignore_nice_load);
+define_one_rw(freq_step);
 
 static struct attribute *dbs_attributes[] = {
 	&sampling_rate_min.attr,
