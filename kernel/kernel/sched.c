@@ -2952,9 +2952,9 @@ unsigned long nr_iowait(void)
 	return sum;
 }
 
-unsigned long nr_iowait_cpu(int cpu)
+unsigned long nr_iowait_cpu(void)
 {
-	struct rq *this = cpu_rq(cpu);
+	struct rq *this = this_rq();
 	return atomic_read(&this->nr_iowait);
 }
 
