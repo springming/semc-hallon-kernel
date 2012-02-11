@@ -277,14 +277,6 @@ config CPU_FREQ_GOV_SMARTASS
 	help
 		'smartass' - a "smart" optimized governor
 
-config CPU_FREQ_GOV_SCARY
-	tristate "'scary' cpufreq governor"
-	depends on CPU_FREQ
-	help
-		scary - a governor for cabbages
-
-		If in doubt, say N.
-
 config CPU_FREQ_GOV_MINMAX
 	tristate "'minmax' cpufreq governor"
 	depends on CPU_FREQ
