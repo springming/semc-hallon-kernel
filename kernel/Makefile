@@ -324,11 +324,12 @@ CHECK		= sparse
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
 MODFLAGS	= -DMODULE
-CFLAGS_MODULE   = $(MODFLAGS)
-AFLAGS_MODULE   = $(MODFLAGS)
+COMMON_OPT_FLAGS = -fgcse -fsched-spec-load-dangerous -fforce-addr -ffast-math -funsafe-math-optimizations -fsingle-precision-constant -mtune=cortex-a8 -march=armv7-a -mfpu=neon -ftree-vectorize -funswitch-loops -funroll-loops -fipa-cp-clone -fpredictive-commoning -pipe
+CFLAGS_MODULE   = $(MODFLAGS) $(COMMON_OPT_FLAGS)
+AFLAGS_MODULE   = $(MODFLAGS) $(COMMON_OPT_FLAGS)
 LDFLAGS_MODULE  = -T $(srctree)/scripts/module-common.lds
-CFLAGS_KERNEL	=
-AFLAGS_KERNEL	=
+CFLAGS_KERNEL	= $(COMMON_OPT_FLAGS)
+AFLAGS_KERNEL	= $(COMMON_OPT_FLAGS)
 CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage
 
 
