@@ -53,7 +53,7 @@ static uid_t binder_context_mgr_uid = -1;
 static int binder_last_id;
 static struct workqueue_struct *binder_deferred_workqueue;
 
-#define BINDER_BUG_DEBUG 1	/* This's for debug purpose, remove related codes after solving issue. */
+#define BINDER_BUG_DEBUG 0	/* This's for debug purpose, remove related codes after solving issue. */
 
 #define BINDER_DEBUG_ENTRY(name) \
 static int binder_##name##_open(struct inode *inode, struct file *file) \
