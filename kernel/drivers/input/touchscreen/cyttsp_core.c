@@ -2183,3 +2183,4 @@ void cyttsp_core_release(void *handle)
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Cypress TrueTouch(R) Standard touchscreen driver core");
 MODULE_AUTHOR("Cypress");
+
