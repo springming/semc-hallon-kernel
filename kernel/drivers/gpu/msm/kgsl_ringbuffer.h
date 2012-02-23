@@ -133,8 +133,8 @@ struct kgsl_rbwatchdog {
 
 #define GSL_RB_MEMPTRS_SCRATCH_COUNT	 8
 struct kgsl_rbmemptrs {
-	int  rptr;
-	int  wptr_poll;
+	volatile int  rptr;
+	volatile int  wptr_poll;
 };
 
 #define GSL_RB_MEMPTRS_RPTR_OFFSET \
@@ -165,9 +165,6 @@ struct kgsl_ringbuffer {
 	unsigned int wptr; /* write pointer offset in dwords from baseaddr */
 	unsigned int rptr; /* read pointer offset in dwords from baseaddr */
 	uint32_t timestamp;
-
-	/* queue of memfrees pending timestamp elapse */
-	struct list_head memqueue;
 
 	struct kgsl_rbwatchdog watchdog;
 
@@ -208,7 +205,7 @@ struct kgsl_ringbuffer {
 #define GSL_RB_CNTL_NO_UPDATE 0x0 /* enable */
 #define GSL_RB_GET_READPTR(rb, data) \
 	do { \
-		*(data) = readl(&(rb)->memptrs->rptr); \
+		*(data) = (rb)->memptrs->rptr; \
 	} while (0)
 #else
 #define GSL_RB_CNTL_NO_UPDATE 0x1 /* disable */
