@@ -577,8 +577,8 @@ static void hdmi_edid_detail_desc(const uint8 *data_buf, uint32 *disp_mode)
 		| data_buf[0xD];
 
 	/*
-         * aspect ratio as 4:3 if within specificed range , rathaer than being
-         * absolute value
+         * Aspect ratio of 4:3 if within specificed range, rather than being
+         * an absolute value
          */
 	aspect_ratio_4_3 = (abs(img_size_h * 3 - img_size_v * 4) < 5) ? 1 : 0;
 
